@@ -1,13 +1,16 @@
 import requests
 
-def print_three_cat_facts():
-    # ① 3回くり返す
-    for _ in range(3):
-        # ② API（猫の豆知識サービス）に「GET」リクエストを送る
-        response = requests.get("https://catfact.ninja/fact")
-        # ③ 返ってきたJSONを辞書にする
-        data = response.json()
-        # ④ “fact”（豆知識）の中身を取り出して表示
-        print(data["fact"])
+def fetch_berlin_weather():
+    url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": 52.52,
+        "longitude": 13.41,
+        "current_weather": True
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    temperature = data["current_weather"]["temperature"] # Replace with the actual temperature value from data
+    windspeed = data["current_weather"]["windspeed"]    # Replace with the actual wind speed value from data
+    print(f"Temperature: {temperature}°C, Wind Speed: {windspeed} m/s")
 
-print_three_cat_facts()
+fetch_berlin_weather()
