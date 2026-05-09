@@ -1,16 +1,16 @@
 import requests
 
-def fetch_berlin_weather():
+def print_first_five_paris_temperatures():
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
-        "latitude": 52.52,
-        "longitude": 13.41,
-        "current_weather": True
+        "latitude": 48.85,
+        "longitude": 2.35,
+        "hourly": "temperature_2m"
     }
     response = requests.get(url, params=params)
     data = response.json()
-    temperature = data["current_weather"]["temperature"] # Replace with the actual temperature value from data
-    windspeed = data["current_weather"]["windspeed"]    # Replace with the actual wind speed value from data
-    print(f"Temperature: {temperature}°C, Wind Speed: {windspeed} m/s")
+    temperatures = data["hourly"]["temperature_2m"]
+    for temp in temperatures[:5]:
+        print(temp)
 
-fetch_berlin_weather()
+print_first_five_paris_temperatures()
